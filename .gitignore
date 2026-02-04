@@ -1,0 +1,28 @@
+# IDE - JetBrains
+.idea/
+*.iml
+*.iws
+
+# IDE - VS Code
+.vscode/
+*.code-workspace
+
+# IDE - Cursor
+.cursor/
+
+# IDE - Zed
+.zed/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# i2pd data and keys
+*.dat
+/data/
+netDb/
+peerProfiles/
+addressbook/
+
+# Docker volumes (if mounted locally)
+/volumes/

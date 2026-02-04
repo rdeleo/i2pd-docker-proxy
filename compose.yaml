@@ -1,0 +1,39 @@
+services:
+  i2pd_proxy:
+    build: .
+    image: i2pd-trixie
+    container_name: i2pd_proxy
+    restart: unless-stopped
+    command: ["--datadir=/home/i2pd/data", "--conf=/home/i2pd/i2pd.conf", "--tunconf=/home/i2pd/tunnels.conf"]
+    dns:
+      - 1.1.1.1
+      - 8.8.8.8
+    # Map ports to the host
+    ports:
+      - "127.0.0.1:7070:7070"   # Web Console (http://localhost:7070)
+      - "127.0.0.1:4444:4444"   # HTTP Proxy
+      - "127.0.0.1:4447:4447"   # SOCKS Proxy
+      - "4567:4567/tcp"   # I2P Router Port (TCP) - Important for network participation
+      - "4567:4567/udp"   # I2P Router Port (UDP) - Important for network participation
+      - "127.0.0.1:6668:6668"   # Ilita IRC Tunnel (Custom)
+      - "127.0.0.1:6669:6669"   # Irc2P Tunnel (Standard)
+      - "127.0.0.1:7659:7659"   # SMTP
+      - "127.0.0.1:7660:7660"   # POP3
+
+    # Persist data and configuration
+    volumes:
+      # Mount the i2pd configuration file from host (read-only)
+      - ./i2pd.conf:/home/i2pd/i2pd.conf:ro
+      # Mount the tunnels configuration file from host (read-only)
+      - ./tunnels.conf:/home/i2pd/tunnels.conf:ro
+      # Persist router keys and data
+      - i2pd_proxy-data:/home/i2pd/data:rw
+
+    # (Optional) Set memory limits to prevent it from eating all RAM
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+
+volumes:
+  i2pd_proxy-data:
