@@ -1,6 +1,9 @@
 services:
   i2pd_proxy:
-    build: .
+    build:
+      context: .
+      platforms:
+        - ${PLATFORM:-linux/amd64}
     image: i2pd-trixie
     container_name: i2pd_proxy
     restart: unless-stopped
