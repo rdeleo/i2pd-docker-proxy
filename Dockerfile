@@ -19,9 +19,9 @@ RUN apt-get update \
 ARG I2PD_BRANCH=openssl
 
 WORKDIR /src
-RUN git clone --depth 1 -b ${I2PD_BRANCH} https://github.com/PurpleI2P/i2pd.git \
-    && cd i2pd \
-    && make -j$(nproc)
+RUN git clone --depth 1 -b ${I2PD_BRANCH} https://github.com/PurpleI2P/i2pd.git
+WORKDIR /src/i2pd
+RUN make -j$(nproc)
 
 # Runtime image
 FROM debian:trixie-slim
