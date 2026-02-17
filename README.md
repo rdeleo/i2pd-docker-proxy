@@ -16,8 +16,12 @@ We wanted to make it as easy as possible for everyone to deploy a secure, up-to-
 
 ## 📋 Prerequisites
 
-- 🐳 Docker & Docker Compose
+Tested on>
 - 🐧 Linux (tested on Debian-based systems)
+- 🍎 macOS (Apple Silicon / ARM architecture supported)
+
+With:
+- 🐳 Docker & Docker Compose
 - ☕ A cup of coffee while it builds
 - 🛠️ *Facultative:* Make for easier your life
 

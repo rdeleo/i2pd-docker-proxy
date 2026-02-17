@@ -17,11 +17,12 @@ RUN apt-get update \
     && rm -rf /var/lib/apt/lists/*
 
 ARG I2PD_BRANCH=openssl
+ARG MAKE_JOBS=4
 
 WORKDIR /src
 RUN git clone --depth 1 -b ${I2PD_BRANCH} https://github.com/PurpleI2P/i2pd.git
 WORKDIR /src/i2pd
-RUN make -j$(nproc)
+RUN make -j${MAKE_JOBS}
 
 # Runtime image
 FROM debian:trixie-slim

@@ -2,9 +2,12 @@ services:
   i2pd_proxy:
     build:
       context: .
+      args:
+        MAKE_JOBS: ${MAKE_JOBS:-4}
       platforms:
         - ${PLATFORM:-linux/amd64}
     image: i2pd-trixie
+    pull_policy: build
     container_name: i2pd_proxy
     restart: unless-stopped
     command: ["--datadir=/home/i2pd/data", "--conf=/home/i2pd/i2pd.conf", "--tunconf=/home/i2pd/tunnels.conf"]
