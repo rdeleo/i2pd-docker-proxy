@@ -1,3 +1,14 @@
+# Auto-detect platform based on host architecture
+UNAME_ARCH := $(shell uname -m)
+ifeq ($(UNAME_ARCH),arm64)
+  PLATFORM := linux/arm64
+else ifeq ($(UNAME_ARCH),aarch64)
+  PLATFORM := linux/arm64
+else
+  PLATFORM := linux/amd64
+endif
+export PLATFORM
+
 # Colors for help output
 CYAN := \033[36m
 GREEN := \033[32m
@@ -22,6 +33,8 @@ help:
 	@echo "  $(CYAN)clean$(RESET)   Remove container, image, and volumes"
 	@echo "  $(CYAN)status$(RESET)  Show container status"
 	@echo "  $(CYAN)help$(RESET)    Show this help message"
+	@echo ""
+	@echo "$(YELLOW)Detected Platform:$(RESET) $(PLATFORM)"
 	@echo ""
 	@echo "$(YELLOW)Proxy Ports:$(RESET)"
 	@echo "  $(CYAN)HTTP Proxy:$(RESET)   127.0.0.1:4444"
